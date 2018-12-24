@@ -9,7 +9,8 @@ import tensorflow.contrib.eager as tfe
 from tensorflow.python.keras.preprocessing import image as kp_image
 from tensorflow.python.keras import models
 import matplotlib as mpl
-
+import shutil
+import time
 
 # 导入图片
 def load_img(path_to_img):
@@ -287,3 +288,9 @@ def run(content_path='content/a.jpg', style_path='style/style2.jpg', path='out/a
     best, best_loss = run_style_transfer(content_path, style_path, num_iterations=num_iterations,
                                          content_weight=content_weight, style_weight=style_weight)
     plt.imsave(path, best)
+
+def test(content_path,style_path):
+    p = content_path.split('/')[1].split('.')[0] + '_' + style_path.split('/')[1]
+    path = os.path.join('static', 'out', p)
+    shutil.copy('static/back.jpg',path)
+    time.sleep(10)
